@@ -2,23 +2,9 @@ import { ObjectId } from 'mongodb';
 import type { PageServerLoad } from './$types';
 import type { MovieType } from '$lib/types/MovieType';
 
-async function validateImageUrl(url: string | null | undefined): Promise<string> {
-	// Return default image if url is falsy
-	if (!url) {
-		return '/defaultMoviePoster.png'
-	}
-
-	try {
-		const response = await fetch(url, { method: 'HEAD' })
-		if (response.ok) {
-			return url
-		} else {
-			return '/defaultMoviePoster.png'
-		}
-	} catch (error) {
-		console.error('Error validating image URL:', error)
-		return '/defaultMoviePoster.png'
-	}
+async function validateImageUrl(url: string): Promise<string> {
+    // Simply return the URL or a default if none provided
+    return url || '/defaultMoviePoster.png'
 }
 
 export const load: PageServerLoad = async ({ params, locals }) => {

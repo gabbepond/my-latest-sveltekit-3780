@@ -45,7 +45,9 @@
     // Add pagination state
     let page = $state(0)
     let pageSize = $state(12) // Number of movie posters per page to show
+    // goo
     let paginatedMovies = $derived(movies.slice(page * pageSize, (page + 1) * pageSize))
+    
     let totalPages = $derived(Math.ceil(movies.length / pageSize))
 
     // Handle rating selection
@@ -59,8 +61,8 @@
     }
 
     function handlePageChange(event: any) {
-        // here
-        page = event.page-1
+        //goo -1
+        page = event.page -1
     }
 
     async function handleSearch() {
@@ -111,7 +113,8 @@
                         <span class="text-surface-200">{yearRange[0]}</span>
                         <span class="text-surface-200">{yearRange[1]}</span>
                     </div>
-                    <Slider bind:value={yearRange} min={minYear} max={maxYear} step={1} />
+                    <!-- goo -->
+                    <Slider value={yearRange} onValueChange={(e) => yearRange = e.value as [number, number]} min={minYear} max={maxYear} step={1} />
                 </div>
             </section>
 
@@ -142,7 +145,8 @@
                         <span class="text-surface-200">{scoreRange[0]}</span>
                         <span class="text-surface-200">{scoreRange[1]}</span>
                     </div>
-                    <Slider bind:value={scoreRange} min={0} max={10} step={1} />
+                    <!-- goo -->
+                    <Slider value={scoreRange} onValueChange={(e) => scoreRange = e.value as [number, number]} min={0} max={10} step={1} />
                 </div>
             </section>
 
@@ -173,8 +177,11 @@
         </div>
         {#if movies.length > 0}
             <div class="mb-8 mt-4 flex justify-center">
-                <Pagination data={movies} {page} {pageSize} onPageChange={handlePageChange} siblingCount={5}/>
+                <!-- goo add +1-->
+                <Pagination data={movies} page={page + 1} {pageSize} onPageChange={handlePageChange} siblingCount={5}/>
+
             </div>
         {/if}
     </div>
 </div>
+

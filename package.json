@@ -41,6 +41,6 @@
 	"dependencies": {
 		"@kinde-oss/kinde-auth-sveltekit": "^2.1.0",
 		"dotenv": "^16.4.7",
-		"mongodb": "^6.14.2"
+		"mongodb": "^6.15.0"
 	}
 }

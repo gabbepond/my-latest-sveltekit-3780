@@ -15,6 +15,15 @@
 <div class="container mx-auto flex h-screen items-center justify-center">
   	{#if data.isAuthenticated}
 		<div>
+			<a href="/movies">
+				<img src="./movies-new.png" alt="Movie icon"/>
+				<span class="text-white text-lg font-bold hover:text-red-400">Movies</span>
+			</a>
+			<a href="/airbnb">
+				<img src="./airbnb.png" alt="Movie icon"/>
+				<h2>Airbnb</h2>
+			</a>
+			
 			
 			<h1>Welcome {data.userProfile?.given_name}!</h1>
 			<a href="/api/auth/logout" class="btn bg-red-600 text-white">Logout</a>
@@ -23,7 +32,8 @@
 		</div>
 	{:else}
 		<div class="flex flex-col items-center space-y-10 ">
-			<!-- <img src="./movies-new.png" alt="Movie icon"/> -->
+
+
 			<h2 class="text-4xl text-blue-700 ">Welcome to Gabbe's Movie App</h2>
 			<div class="flex gap-x-4 drop-shadow-lg">
 				<a
