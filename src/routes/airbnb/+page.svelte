@@ -44,6 +44,25 @@
 		starValue = 1
 	}
 </script>
+<!-- <header class="flex items-center text-left">
+	<img src="/airbnb.png" alt="Airbnb Logo" class=" m-2" />
+	<h5 class="h6 m-2 bg-white text-gray-700 italic">Living Your Best Life</h5>
+</header> -->
+
+<nav class="text-gray-800 bg-white p-6">
+    <div class="flex justify-between items-center">
+		<div class="flex items-center text-left">
+			<img src="/airbnb.png" alt="Airbnb Logo" class=" m-2" />
+			<h5 class="h6 m-2 bg-white text-gray-700 italic">Living Your Best Life</h5>
+		</div>
+		
+        <div class="flex space-x-4">
+            <a href="/" class="hover:text-red-400">Home</a>
+            <a href="/movies" class="hover:text-red-400">Movies</a>
+            <a href="/airbnb" class="hover:text-red-400">Airbnb</a>
+        </div>
+    </div>
+</nav>
 
 <main bind:this={scrollElement}>
 	<!-- Your form that uses the selected listing ID -->
@@ -112,4 +131,3 @@
 	<AirbnbListings listings={data.airbnbs} onSelectListing={handleSelectListing} />
 </main>
 
-<!-- changes to AIRBNB -->

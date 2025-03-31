@@ -95,6 +95,16 @@
         }
     }
 </script>
+<nav class="text-gray-800 bg-white p-6">
+    <div class="flex justify-between items-center">
+        <h1 class="text-xl font-bold">Gabbe's Movies</h1>
+        <div class="flex space-x-4">
+            <a href="/" class="hover:text-red-400">Home</a>
+            <a href="/movies" class="hover:text-red-400">Movies</a>
+            <a href="/airbnb" class="hover:text-red-400">Airbnb</a>
+        </div>
+    </div>
+</nav>
 
 <div class="min-h-screen bg-cyan-600">
     <div class="container mx-auto px-4 py-2">
