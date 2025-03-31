@@ -27,8 +27,8 @@
     <!-- Main Content -->
     <div class="flex flex-grow items-center justify-center">
         {#if data.isAuthenticated}
-            <div>
-                <h1>Welcome {data.userProfile?.given_name}!</h1>
+            <div class="flex flex-col items-center space-y-4">
+                <h1 class="m-5 text-2xl text-gray-800">Welcome {data.userProfile?.given_name}!</h1>
                 <a href="/api/auth/logout" class="btn bg-red-600 text-white">Logout</a>
             </div>
         {:else}

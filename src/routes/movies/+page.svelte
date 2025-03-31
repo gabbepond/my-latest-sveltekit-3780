@@ -96,7 +96,7 @@
     }
 </script>
 
-<div class="min-h-screen bg-gradient-to-br from-surface-900 via-tertiary-800 to-primary-900">
+<div class="min-h-screen bg-cyan-600">
     <div class="container mx-auto px-4 py-2">
         <div class="card">
             <header class="mb-2 text-center">
@@ -154,7 +154,7 @@
             <div class="text-center">
                 <button
                     type="button"
-                    class="btn rounded-full bg-primary-50 font-semibold preset-filled"
+                    class="btn rounded-full bg-primary-50 font-semibold preset-filled text-black"
                     onclick={handleSearch}>
                     Find Movies 🍿
                 </button>
