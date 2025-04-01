@@ -1,54 +1,48 @@
 <script lang="ts">
-	import { goto } from '$app/navigation'
-	import { browser } from '$app/environment'
-	import AirbnbListings from '$lib/components/AirbnbListings.svelte'
-	import { Rating } from '@skeletonlabs/skeleton-svelte'
-	import { enhance } from '$app/forms'
-	import { updated } from '$app/state'
-	import type { ActionData, PageData } from './$types'
+    import { goto } from '$app/navigation';
+    import { browser } from '$app/environment';
+    import AirbnbListings from '$lib/components/AirbnbListings.svelte';
+    import { Rating } from '@skeletonlabs/skeleton-svelte';
+    import { enhance } from '$app/forms';
+    import { updated } from '$app/state';
+    import type { ActionData, PageData } from './$types';
 
-	// Correctly type both data and form using a single $props call
-	const { data, form } = $props<{ data: PageData; form: ActionData | null }>()
+    // Correctly type both data and form using a single $props call
+    const { data, form } = $props<{ data: PageData; form: ActionData | null }>();
 
-	//console.log(data.userProfile)
-	if (!data.userProfile && browser) {
-		console.log('No user profile')
-		goto('/')
-	}
-	console.log('data:', data)
+    //console.log(data.userProfile)
+    if (!data.userProfile && browser) {
+        console.log('No user profile');
+        goto('/');
+    }
 
-	let scrollElement: HTMLElement
-	let formVisible = $state(true)
-	let starValue = $state(2)
-	let listingName = $state('My Listing')
-	let loading = $state(false)
+    let scrollElement: HTMLElement;
+    let formVisible = $state(true);
+    let starValue = $state(2);
+    let listingName = $state('My Listing');
+    let loading = $state(false);
 
-	let selectedListing = $state('')
+    let selectedListing = $state('');
 
-	// Callback function to handle listing selection
-	function handleSelectListing(listing: any) {
-		console.log('Selected listing:', listing)
-		selectedListing = listing
-		formVisible = true
-		// Set the listing name for the review form
-		if (listing && listing.name) {
-			listingName = listing.name
-		}
-		scrollElement.scrollIntoView({ behavior: 'smooth' })
-	}
+    // Callback function to handle listing selection
+    function handleSelectListing(listing: any) {
+        console.log('Selected listing:', listing);
+        selectedListing = listing;
+        formVisible = true;
+        // Set the listing name for the review form
+        if (listing && listing.name) {
+            listingName = listing.name;
+        }
+        scrollElement.scrollIntoView({ behavior: 'smooth' });
+    }
 
-	// Reset the form
-	function resetForm() {
-		formVisible = false
-		selectedListing = ''
-		starValue = 1
-	}
+    // Reset the form
+    function resetForm() {
+        formVisible = false;
+        selectedListing = '';
+        starValue = 1;
+    }
 </script>
-<!-- <header class="flex items-center text-left">
-	<img src="/airbnb.png" alt="Airbnb Logo" class=" m-2" />
-	<h5 class="h6 m-2 bg-white text-gray-700 italic">Living Your Best Life</h5>
-</header> -->
-
 <nav class="text-gray-800 bg-white p-6">
     <div class="flex justify-between items-center">
 		<div class="flex items-center text-left">
@@ -65,69 +59,134 @@
 </nav>
 
 <main bind:this={scrollElement}>
-	<!-- Your form that uses the selected listing ID -->
-	{#if selectedListing && formVisible}
-		<form
-			method="POST"
-			action="?/submitReview"
-			class="mx-auto mt-8 max-w-2xl rounded-lg bg-white p-4 shadow-lg"
-			use:enhance={() => {
-				loading = true
+    <!-- Your form that uses the selected listing ID -->
+    <!-- new -->
+    <!-- <header class="flex items-center text-left">
+        <img src="/airbnb.png" alt="Airbnb Logo" class=" m-2" />
+        <h5 class="h6 m-2 bg-white text-gray-700 italic">Living Your Best Life</h5>
+    </header> -->
 
-				return async ({ update }) => {
-					await update()
-					if (form?.success) {
-						resetForm()
-					}
-					loading = false
-				}
-			}}>
-			<input type="hidden" name="selectedListing" value={selectedListing} />
-			<input type="hidden" name="username" value={data.userProfile.name} />
-			<input type="hidden" name="listingName" value={listingName} />
-			<div>
-				<p class="text-2xl">Review of: {listingName}</p>
-				<Rating value={starValue} allowHalf onValueChange={(e) => (starValue = e.value)} />
-				<label for="review" class="mb-2 mt-4 block">Your Review</label>
-				<textarea
-					class="textarea w-full"
-					id="review"
-					rows="4"
-					required
-					name="review"
-					placeholder="Write your review here"></textarea>
-				<div class="m-2 flex justify-end gap-2">
-					<button
-						class="btn preset-filled-secondary-50-950"
-						type="button"
-						onclick={() => (formVisible = false)}>Cancel</button>
-					<button class="btn preset-filled-primary-50-950" type="submit" disabled={loading}
-						>{loading ? 'Uploading review...' : 'Submit Review'}</button>
-				</div>
-			</div>
+    {#if selectedListing && formVisible}
+        <!-- <form
+            method="POST"
+            action="?/submitReview"
+            class="mx-auto mt-8 max-w-2xl rounded-lg bg-white p-4 shadow-lg border-2 border-green-400"
+            use:enhance={() => {
+                loading = true;
 
-		</form>
+                return async ({ update }) => {
+                    await update();
+                    if (form?.success) {
+                        resetForm();
+                    }
+                    loading = false;
+                };
+            }}
+        > -->
+        <form
+        method="POST"
+        action="?/submitReview"
+            class="mx-auto mt-8 w-96 h-[300px] rounded-lg bg-white p-4 shadow-lg border-2 border-green-400 flex flex-col justify-between overflow-hidden"
+        use:enhance={() => {
+            loading = true;
+            return async ({ update }) => {
+                await update();
+                if (form?.success) {
+                    resetForm();
+                }
+                loading = false;
+            };
+        }}
+    >
+    
+            <input type="hidden" name="selectedListing" value={selectedListing} />
+            <input type="hidden" name="username" value={data.userProfile.name} />
+            <input type="hidden" name="listingName" value={listingName} />
+            <div>
+                <p class="text-md"><strong>Review of: {listingName}</strong></p>
+
+                <Rating value={starValue} allowHalf onValueChange={(e) => (starValue = e.value)} />
+                <label for="review" class="mt-4 mb-2 block">Your Review</label>
+                <textarea
+                    class="textarea w-full"
+                    id="review"
+                    rows="4"
+                    required
+                    name="review"
+                    placeholder="Write your review here"
+                ></textarea>
+                <div class="m-2 flex justify-end gap-2">
+                    <button
+                        class="btn border-2 border-gray-600 bg-red-500 px-2 py-1 text-black"
+                        type="button"
+                        onclick={() => (formVisible = false)}>Cancel</button
+                    >
+                    <button
+                        class="btn border-2 border-gray-600 bg-green-400 px-2 py-1 text-black"
+                        type="submit"
+                        disabled={loading}>{loading ? 'Uploading review...' : 'Submit Review'}</button
+                    >
+                </div>
+            </div>
+        </form>
         {#if form}
-        <div class={`${form.success ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
-            {form.message}
+            <div class={`${form.success ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+                {form.message}
+            </div>
+        {/if}
+    {/if}
+
+    <!-- {#if form?.reviews}
+        <div class="w-full">
+    
+            <div
+                class="flex snap-x snap-mandatory scroll-px-4 gap-4 overflow-x-auto scroll-smooth px-4 py-10"
+            >
+    
+                {#each form.reviews as review, i}
+                    <div class="bg-gray-500 card preset-filled w-40 shrink-0 snap-start py-20 text-center md:w-80">
+                        <span>{review.comments}</span>
+                    </div>
+                {/each}
+            </div>
+        </div>
+    {/if} -->
+    <!-- new -->
+    {#if form?.reviews}
+        <div class="w-full">
+            <!-- Scroll Container -->
+            <div 
+                class="ml-2 flex snap-x snap-mandatory justify-start gap-4 overflow-x-auto scroll-smooth px-1 py-1"
+            >
+                {#each form.reviews as review}
+                    <div
+                        class="card preset-filled w-40 shrink-0 snap-start rounded-md bg-gray-500 px-1 py-1 text-center md:w-80"
+                    >
+                        <div class="flex scale-75 justify-center">
+                            <Rating value={review.rating} disabled />
+                        </div>
+                        <span class="block max-h-24 overflow-hidden text-sm text-ellipsis">
+                            {#if review.comments.length > 100}
+                                {review.comments.slice(0, 97) + '...'}
+                            {:else}
+                                {review.comments}
+                            {/if}
+                        </span>
+                    </div>
+                {/each}
+            </div>
+            <!-- new -->
+            <!-- Cancel Button -->
+            <div class="mt-2 flex justify-center">
+                <button
+                    class="btn mb-5 border-1 border-green-500 bg-red-400 px-2 py-1 text-white"
+                    onclick={() => goto('/airbnb')}
+                >
+                    Close Reviews
+                </button>
+            </div>
         </div>
     {/if}
-	{/if}
 
-	{#if form?.reviews}
-	<div class="w-full">
-		<!-- Scroll Container -->
-		<div class="snap-x scroll-px-4 snap-mandatory scroll-smooth flex gap-4 overflow-x-auto px-4 py-10">
-		  <!-- Generate a array of 8 items; loop through each item -->
-		  {#each form.reviews as review, i}
-			  <div class="snap-start shrink-0 card preset-filled py-20 w-40 md:w-80 text-center">
-				<span>{review.comments}</span>
-			  </div>
-		  {/each}
-		</div>
-	  </div>
-{/if}
-
-	<AirbnbListings listings={data.airbnbs} onSelectListing={handleSelectListing} />
+    <AirbnbListings listings={data.airbnbs} onSelectListing={handleSelectListing} />
 </main>
-
