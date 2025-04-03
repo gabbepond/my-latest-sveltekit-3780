@@ -45,11 +45,11 @@
 </script>
 <nav class="text-gray-800 bg-white p-6">
     <div class="flex justify-between items-center">
-		<div class="flex items-center text-left">
-			<img src="/airbnb.png" alt="Airbnb Logo" class=" m-2" />
-			<h5 class="h6 m-2 bg-white text-gray-700 italic">Living Your Best Life</h5>
-		</div>
-		
+        <div class="flex items-center text-left">
+            <img src="/airbnb.png" alt="Airbnb Logo" class=" m-2" />
+            <h5 class="h6 m-2 bg-white text-gray-700 italic">Living Your Best Life</h5>
+        </div>
+        
         <div class="flex space-x-4">
             <a href="/" class="hover:text-red-400">Home</a>
             <a href="/movies" class="hover:text-red-400">Movies</a>
@@ -106,7 +106,7 @@
                 <p class="text-md"><strong>Review of: {listingName}</strong></p>
 
                 <Rating value={starValue} allowHalf onValueChange={(e) => (starValue = e.value)} />
-                <label for="review" class="mt-4 mb-2 block">Your Review</label>
+                <label for="review" class="mt-2 mb-2 block">Your Review</label>
                 <textarea
                     class="textarea w-full"
                     id="review"
@@ -155,22 +155,22 @@
     {#if form?.reviews}
         <div class="w-full">
             <!-- Scroll Container -->
+            <!-- <h1 class="ml-3"> {selectedListing}</h1> -->
             <div 
-                class="ml-2 flex snap-x snap-mandatory justify-start gap-4 overflow-x-auto scroll-smooth px-1 py-1"
+                class="ml-2 flex snap-x snap-mandatory justify-start gap-4 overflow-x-auto scroll-smooth px-4 py-2"
             >
-                {#each form.reviews as review}
+                {#each form.reviews as review,i}
                     <div
-                        class="card preset-filled w-40 shrink-0 snap-start rounded-md bg-gray-500 px-1 py-1 text-center md:w-80"
+                        class="card preset-filled w-40 shrink-0 snap-start rounded-md bg-gray-500 px-2 py-1 text-center md:w-80 overflow-y-auto"
                     >
-                        <div class="flex scale-75 justify-center">
+                        <h1>{listingName}</h1>
+                        <div class="flex scale-75 justify-center text-red-600">
                             <Rating value={review.rating} disabled />
                         </div>
-                        <span class="block max-h-24 overflow-hidden text-sm text-ellipsis">
-                            {#if review.comments.length > 100}
-                                {review.comments.slice(0, 97) + '...'}
-                            {:else}
-                                {review.comments}
-                            {/if}
+						<p> <strong>{review.reviewer_name.split(' ')[0]}</strong></p>
+                    
+                        <span class="block max-h-24 text-sm text-left">
+                            {review.comments}
                         </span>
                     </div>
                 {/each}
