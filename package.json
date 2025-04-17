@@ -40,7 +40,10 @@
 	},
 	"dependencies": {
 		"@kinde-oss/kinde-auth-sveltekit": "^2.1.0",
+		"@lucide/svelte": "^0.488.0",
+		"chart.js": "^4.4.9",
 		"dotenv": "^16.4.7",
+		"lucide-svelte": "^0.488.0",
 		"mongodb": "^6.15.0"
 	}
 }
