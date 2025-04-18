@@ -43,19 +43,21 @@
         starValue = 1;
     }
 </script>
-<nav class="text-gray-800 bg-white p-6">
-    <div class="flex justify-between items-center">
-        <div class="flex items-center text-left">
-            <img src="/airbnb.png" alt="Airbnb Logo" class=" m-2" />
-            <h5 class="h6 m-2 bg-white text-gray-700 italic">Living Your Best Life</h5>
-        </div>
-        
-        <div class="flex space-x-4">
-            <a href="/" class="hover:text-red-400">Home</a>
-            <a href="/movies" class="hover:text-red-400">Movies</a>
-            <a href="/airbnb" class="hover:text-red-400">Airbnb</a>
-        </div>
-    </div>
+<!-- 🌿 TOP NAVIGATION -->
+<nav class="bg-gradient-to-r from-white to-green-500 text-white shadow-lg sticky top-0 z-50">
+	<div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+		<!-- Keep Airbnb logo default size -->
+		<div class="flex items-center text-left">
+			<img src="/airbnb.png" alt="Airbnb Logo" class="m-2" />
+			<h5 class="h6 m-2 text-gray-700 italic">Living Your Best Life</h5>
+		</div>
+		<div class="flex gap-4 text-sm md:text-base">
+			<a href="/" class="hover:text-white/80 transition">🌍 Home</a>
+			<a href="/movies" class="hover:text-white/80 transition">🎬 Movies</a>
+			<a href="/airbnb" class="hover:text-white/80 transition">🏡 Airbnb</a>
+			<a href="/sales" class="hover:text-white/80 transition">💰 Sales</a>
+		</div>
+	</div>
 </nav>
 
 <main bind:this={scrollElement}>

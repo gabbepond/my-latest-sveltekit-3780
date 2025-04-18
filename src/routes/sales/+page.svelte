@@ -73,6 +73,18 @@
 		loading = false;
 	};
 </script>
+ <!-- 🌿 TOP NAVIGATION -->
+        <nav class="bg-gradient-to-r from-white to-indigo-600 text-white shadow-lg sticky top-0 z-50">
+            <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+                <h1 class="text-xl font-bold text-indigo-600">SalesVerse</h1>
+                <div class="flex gap-4 text-sm md:text-base">
+                    <a href="/" class="hover:text-white/80 transition">🌍 Home</a>
+                    <a href="/movies" class="hover:text-white/80 transition">🎬 Movies</a>
+                    <a href="/airbnb" class="hover:text-white/80 transition">🏡 Airbnb</a>
+                    <a href="/sales" class="hover:text-white/80 transition">💰 Sales</a>
+                </div>
+            </div>
+        </nav>
 
 <main class="min-h-screen w-full bg-gradient-to-br from-violet-100 to-sky-100 py-12 px-6">
 	<div class="max-w-5xl mx-auto bg-white/80 backdrop-blur-md rounded-3xl shadow-xl p-10">

@@ -95,16 +95,21 @@
         }
     }
 </script>
-<nav class="text-gray-800 bg-white p-6">
-    <div class="flex justify-between items-center">
-        <h1 class="text-xl font-bold">Gabbe's Movies</h1>
-        <div class="flex space-x-4">
-            <a href="/" class="hover:text-red-400">Home</a>
-            <a href="/movies" class="hover:text-red-400">Movies</a>
-            <a href="/airbnb" class="hover:text-red-400">Airbnb</a>
-        </div>
-    </div>
+
+        
+        <!-- 🌿 TOP NAVIGATION -->
+<nav class="bg-gradient-to-r from-white to-cyan-600 text-white shadow-lg sticky top-0 z-50">
+	<div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+		<h1 class="text-xl font-bold text-cyan-600">Gabbe's MovieVerse</h1>
+		<div class="flex gap-4 text-sm md:text-base">
+			<a href="/" class="hover:text-white/80 transition">🌍 Home</a>
+			<a href="/movies" class="hover:text-white/80 transition">🎬 Movies</a>
+			<a href="/airbnb" class="hover:text-white/80 transition">🏡 Airbnb</a>
+			<a href="/sales" class="hover:text-white/80 transition">💰 Sales</a>
+		</div>
+	</div>
 </nav>
+
 
 <div class="min-h-screen bg-cyan-600">
     <div class="container mx-auto px-4 py-2">

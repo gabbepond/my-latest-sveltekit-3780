@@ -1,48 +1,54 @@
 <script lang="ts">
-    import { browser } from '$app/environment';
-    import type { PageData } from './$types'
+	import { browser } from '$app/environment';
+	import type { PageData } from './$types';
 
-    // Use $props() rune to get data from layout.server.ts load function
-    const { data } = $props<{ data: PageData }>();
-
-    //console.log('User Profile:', data.userProfile);
-    //console.log('Is Authenticated:', data.isAuthenticated);
-
-    //console.log('Browser:', browser);
-    
+	const { data } = $props<{ data: PageData }>();
 </script>
 
-<div class="container mx-auto flex flex-col h-screen">
-    <!-- Navigation Menu -->
-    <nav class="text-gray-800 bg-white p-6">
-        <div class="flex justify-between items-center">
-            <h1 class="text-xl font-bold">Gabbe's SvelteKit App</h1>
-            <div class="flex space-x-4">
-                <a href="/" class="hover:text-red-400">Home</a>
-                <a href="/movies" class="hover:text-red-400">Movies</a>
-                <a href="/airbnb" class="hover:text-red-400">Airbnb</a>
-            </div>
-        </div>
-    </nav>
+<div class="flex h-screen w-full">
+	{#if data.isAuthenticated}
+		<!-- Left Sidebar Navigation -->
+		<nav class="w-64 min-w-64 bg-gradient-to-b from-blue-600 to-green-500 text-white p-6 space-y-6 shadow-xl">
+			<h1 class="text-3xl font-extrabold tracking-wide">🌱 Gabbeverse</h1>
+			<div class="space-y-2 text-lg">
+				<a href="/" class="block px-4 py-2 rounded-lg hover:bg-white hover:text-blue-600 transition">🌍 Home</a>
+				<a href="/movies" class="block px-4 py-2 rounded-lg hover:bg-white hover:text-green-600 transition">🎬 Movies</a>
+				<a href="/airbnb" class="block px-4 py-2 rounded-lg hover:bg-white hover:text-emerald-600 transition">🏡 Airbnb</a>
+				<a href="/sales" class="block px-4 py-2 rounded-lg hover:bg-white hover:text-lime-600 transition">💰 Sales</a>
+			</div>
+		</nav>
+	{/if}
 
-    <!-- Main Content -->
-    <div class="flex flex-grow items-center justify-center">
-        {#if data.isAuthenticated}
-            <div class="flex flex-col items-center space-y-4">
-                <h1 class="m-5 text-2xl text-gray-800">Welcome {data.userProfile?.given_name}!</h1>
-                <a href="/api/auth/logout" class="btn bg-red-600 text-white">Logout</a>
-            </div>
-        {:else}
-            <div class="flex flex-col items-center space-y-10">
-                <h2 class="text-4xl text-blue-700">Welcome to Gabbe's Movie App</h2>
-                <div class="flex gap-x-4 drop-shadow-lg">
-                    <a
-                        href="/api/auth/login?post_login_redirect_url=/"
-                        class="btn bg-red-600 text-white">Login</a>
-                    <a href="/api/auth/register" class="btn bg-red-600 text-white">Signup</a>
-                </div>
-            </div>
-        {/if}
-    </div>
+	<!-- Main Content -->
+	<div class="flex-1 flex items-center justify-center p-10 overflow-auto bg-gradient-to-br from-blue-50 to-green-50">
+		{#if data.isAuthenticated}
+			<div class="text-center space-y-6">
+				<h1 class="text-4xl font-bold text-green-700">Welcome {data.userProfile?.given_name}! 👋</h1>
+				<a
+					href="/api/auth/logout"
+					class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-full shadow transition"
+				>
+					Logout
+				</a>
+			</div>
+		{:else}
+			<div class="text-center space-y-10">
+				<h2 class="text-4xl font-bold text-blue-700">Welcome to Gabbeverse 🌍</h2>
+				<div class="flex justify-center gap-6">
+					<a
+						href="/api/auth/login?post_login_redirect_url=/"
+						class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-full shadow transition"
+					>
+						Login
+					</a>
+					<a
+						href="/api/auth/register"
+						class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-full shadow transition"
+					>
+						Signup
+					</a>
+				</div>
+			</div>
+		{/if}
+	</div>
 </div>
-
