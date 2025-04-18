@@ -1,78 +1,49 @@
 <script lang="ts">
-    // Use the props run with the onSelectListing callback
-    const { 
-        listings = [], 
-        onSelectListing = (listing: any) => {} 
-    } = $props<{ 
-        listings: any[],
-        onSelectListing?: (listing: any) => void 
-    }>();
-    
-    // Function to handle review button click
-    function handleReviewClick(listing: any) {
-        // Call the callback prop directly
-        onSelectListing(listing);
-    }
-    let imageUrl: string;
-    let imgError = $state(false)
-const defaultImage = '/comingsoon.jpg'
+	const {
+		listings = [],
+		onSelectListing = (listing: any) => {}
+	} = $props<{
+		listings: any[],
+		onSelectListing?: (listing: any) => void
+	}>();
 
-function handleImageError() {
-    imgError = true
-}
+	function handleReviewClick(listing: any) {
+		onSelectListing(listing);
+	}
 
+	const defaultImage = '/comingsoon.jpg';
 </script>
 
+<div class="flex w-full flex-wrap justify-center gap-6 py-6">
+	{#each listings as listing}
+		<div class="relative w-80 h-[480px] flex flex-col bg-white rounded-2xl shadow-xl border border-green-300 hover:scale-[1.03] hover:shadow-2xl transition-transform">
+			<div class="relative h-48 w-full overflow-hidden rounded-t-2xl">
+				<img
+					class="w-full h-full object-cover"
+					src={listing.images?.picture_url || defaultImage}
+					onerror={(e) => e.currentTarget.src = defaultImage}
+					alt={listing.name}
+					loading="lazy"
+				/>
+				<div class="absolute top-2 right-2 bg-white/80 text-blue-600 text-xs px-2 py-1 rounded-md shadow">
+					${listing.price}
+				</div>
+			</div>
 
-<div class="flex w-full flex-wrap justify-center gap-4">
-    {#each listings as listing}
-    
-        <div class="mt-5 w-80 h-[450px] flex flex-col bg-white shadow-lg rounded-lg overflow-hidden border-2 border-red-400">
-       
-            <img 
-            class="w-full h-44 object-cover object-center rounded-lg" 
-            src={listing.images?.picture_url}
-            onerror={handleImageError}
-            alt={listing.name} 
-            loading="lazy"
-        />
-            <div class="p-4 flex flex-col flex-grow">
-                <h3 class="text-gray-800 text-md font-medium">{listing.name}</h3>
-                <p class="mt-2 text-gray-600 line-clamp-4 flex-grow">{listing.summary}</p>
-                <div class="flex justify-between items-center mt-3">
-                    <h4 class="text-lg font-medium text-gray-700">${listing.price}</h4>
-                    <button 
-                        class="px-3 py-1 bg-gray-800 text-white text-xs font-medium uppercase rounded"
-                        onclick={() => handleReviewClick(listing)}
-                    >
-                        Review
-                    </button>
-                </div>
-            </div>
-        </div>
-    {/each}
+			<div class="flex flex-col flex-grow px-4 py-3">
+				<h3 class="text-lg font-semibold text-gray-800 line-clamp-1">{listing.name}</h3>
+				<p class="text-sm text-gray-600 mt-2 flex-grow overflow-auto h-24 scrollbar-thin scrollbar-thumb-green-400 scrollbar-track-green-100">{listing.summary}</p>
+
+				<div class="mt-2 flex justify-end">
+					<button
+						onclick={() => handleReviewClick(listing)}
+						class="bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 text-white text-sm font-medium px-4 py-2 rounded-full shadow"
+					>
+						✍️ Review
+					</button>
+				</div>
+			</div>
+		</div>
+	{/each}
 </div>
 
-<!-- 
-<div class="flex w-full flex-wrap justify-center">
-    {#each listings as listing}
-        <div class="m-4 w-1/4">
-            <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-                <img class="w-full h-56 object-cover object-center" src={listing.images.picture_url} alt={listing.name} />
-                <div class="p-4">
-                    <h3 class="text-gray-800 text-xl font-medium">{listing.name}</h3>
-                    <p class="mt-2 text-gray-600">{listing.summary}</p>
-                    <div class="flex justify-between mt-3 items-center">
-                        <h4 class="text-xl font-medium text-gray-700">${listing.price}</h4>
-                        <button 
-                            class="px-3 py-1 bg-gray-800 text-white text-xs font-medium uppercase rounded"
-                            onclick={() => handleReviewClick(listing)}
-                        >
-                            Review
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    {/each}
-</div> -->
