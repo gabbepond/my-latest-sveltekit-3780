@@ -85,7 +85,7 @@
 			<div class="flex justify-end gap-2 pt-4">
 				<button
 					type="button"
-					on:click={() => (formVisible = false)}
+					onclick={() => (formVisible = false)}
 					class="btn bg-red-500 text-white hover:bg-red-600 px-4 py-1.5 rounded-full"
 				>
 					Cancel
@@ -107,27 +107,43 @@
 		{/if}
 	{/if}
 
-	{#if form?.reviews}
-		<div class="mt-10">
-			<h3 class="text-lg font-bold text-green-800 mb-2">Recent Reviews 🌟</h3>
-			<div class="flex snap-x snap-mandatory overflow-x-auto scroll-smooth gap-4 px-2 py-2">
-				{#each form.reviews as review, i}
-					<div class="bg-white rounded-xl shadow-md p-4 w-72 snap-start">
-						<h4 class="text-md font-semibold mb-1">{listingName}</h4>
-						<div class="flex justify-center mb-1 text-red-500">
-							<Rating value={review.rating} disabled />
-						</div>
-						<p class="text-sm text-gray-700"><strong>{review.reviewer_name.split(' ')[0]}</strong>: {review.comments}</p>
-					</div>
-				{/each}
-			</div>
-			<div class="mt-4 text-center">
-				<button class="btn bg-red-400 hover:bg-red-500 text-white px-4 py-1 rounded" on:click={() => goto('/airbnb')}>
-					Close Reviews
-				</button>
-			</div>
-		</div>
-	{/if}
+    {#if form?.reviews}
+    <div class="w-full">
+        <!-- Scroll Container -->
+        <!-- <h1 class="ml-3"> {selectedListing}</h1> -->
+        <div
+            class="ml-2 flex snap-x snap-mandatory justify-start gap-4 overflow-x-auto scroll-smooth px-4 py-2"
+        >
+            {#each form.reviews as review, i}
+                <div
+                    class="card preset-filled w-40 shrink-0 snap-start overflow-y-auto rounded-md bg-white text-black shadow-md  px-2 py-1 text-center md:w-80"
+                >
+                    <h1>{listingName}</h1>
+                    <div class="flex scale-75 justify-center text-red-700">
+                        <Rating value={review.rating} disabled />
+                    </div>
+                    <!-- <p class="text-sm"> <strong>{review.reviewer_name}</strong></p> -->
+                    <p><strong>{review.reviewer_name.split(' ')[0]}</strong></p>
+
+                    <span class="block max-h-24 text-left text-sm">
+                        {review.comments}
+                    </span>
+                </div>
+            {/each}
+        </div>
+        <!-- new -->
+        <!-- Cancel Button -->
+        <div class="mt-2 flex justify-center">
+            <button
+                class="btn mb-5 border-1 border-green-500 bg-blue-500 px-2 py-1 text-white"
+                onclick={() => goto('/airbnb')}
+            >
+                Close Reviews
+            </button>
+        </div>
+    </div>
+{/if}
+
 
 	<AirbnbListings listings={data.airbnbs} onSelectListing={handleSelectListing} />
 </main>
