@@ -3,6 +3,7 @@
   import { Rating } from '@skeletonlabs/skeleton-svelte';
   // goo
   import { writable } from 'svelte/store';
+  import { goto } from '$app/navigation';
 
   let { movie } = $props<{ movie: MovieType }>();
   // goo 5
@@ -15,10 +16,8 @@
   
   // Calculate star rating
   const stars = Array.from({ length: 5 }, (_, i) => i < Math.round(movie.rating));
-  let ratingOutOfFive = movie.imdb.rating / 2;
-  console.log("rating ", ratingOutOfFive);
-  console.log("rating ", movie.imdb.rating);
-  console.log("movie ", movie)
+  let ratingOutOfFive = movie?.imdb?.rating / 2;
+  ratingOutOfFive = Math.round(ratingOutOfFive * 2) / 2;
   // goo
   // Create a proper Svelte store
   const rating = writable(movie?.imdb?.rating || 0);
@@ -72,9 +71,9 @@
         <div class="flex gap-1">
           <!-- goo -->
           <!-- <Rating value={ratingOutOfFive} allowHalf readOnly /> -->
-          <Rating value={$rating} allowHalf readOnly></Rating>
+          <Rating value={ratingOutOfFive} allowHalf readOnly />
         </div>
-        <span class="text-sm font-medium">{ratingOutOfFive} Stars</span>
+        <span class="text-sm font-medium">{ratingOutOfFive.toFixed(1)} Stars</span>
         <!-- <span class="text-sm text-gray-500 dark:text-gray-400">({movie.reviews} reviews)</span> -->
       </div>
 
@@ -111,18 +110,24 @@
       <div class="flex gap-4 mt-auto">
         <h3 class="text-sm font-semibold text-gray-900 dark:text-gray-100">Genres</h3>
         <span class="text-sm font-medium">{movie.genres.join(', ')}</span>
-        <!-- here -->    
+         
       </div>
-      <!-- here -->
+     
+
       <div class="flex gap-4 mt-auto">
-        <button class="btn preset-outlined-primary-50-950 bg-red-500 text-white" type="button">
-          Add to Watchlist
+        <button 
+          class="btn preset-outlined-primary-50-950 bg-red-500 text-white" 
+          onclick={() => goto('/movies')}
+     
+        >
+          Return To Movies
         </button>
-    </div>
+      </div>
+      
     </div>
   </div>
 </div>
 
-<style>
+<style> 
   /* Add any custom styles here if needed */
 </style>
